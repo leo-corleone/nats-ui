@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 配置文件修改时重新加载，默认true -->
+<configuration scan="true">
+
+
+    <!-- 控制台附加器 -->
+    <appender name="console_log" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-10date %class:[%line] %highlight(%level) %msg %n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 文件附加器  -->
+<!--    <appender name="FILE" class="ch.qos.logback.core.FileAppender">-->
+<!--        <encoder>-->
+<!--            <pattern>%-50date %class:%line [%level] %msg %n</pattern>-->
+<!--        </encoder>-->
+<!--        <file>app.log</file>-->
+<!--        <append>true</append>-->
+<!--    </appender>-->
+
+    <!-- 滚动文件附加器 -->
+    <appender name="roll_file_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./logs/app.log</file>
+        <encoder>
+            <pattern>%-50date %class:[%line][%level] %msg %n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>./logs/%d{yyyy-MM-dd HH-mm-ss}%i.log</fileNamePattern>
+            <maxHistory>3</maxHistory>
+            <totalSizeCap>5GB</totalSizeCap>
+            <maxFileSize>50MB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+
+
+    <root level="INFO">
+        <appender-ref ref="console_log"></appender-ref>
+<!--        <appender-ref ref="roll_file_log"></appender-ref>-->
+    </root>
+
+</configuration>
