@@ -13,4 +13,13 @@ public class ViewConstant {
      */
     public static final String LOGO = "/image/logo.png";
 
+    /**
+     * 窗口宽度
+     */
+    public static final int WINDOW_WIDTH = 900;
+
+    /**
+     * 窗口高度
+     */
+    public static final int WINDOW_HEIGHT = 600;
 }

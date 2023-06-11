@@ -2,20 +2,16 @@ package org.suen;
 
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.suen.constant.ViewConstant;
-
-import java.awt.event.ActionEvent;
-import java.util.Optional;
+import org.suen.view.LeftPane;
+import org.suen.view.CenterPane;
+import org.suen.view.MainPane;
 
 @Slf4j
 public class MainApplication extends Application {
@@ -39,32 +35,31 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Label label = new Label("username");
-        BorderPane pane = new BorderPane(label);
-        Scene scene = new Scene(pane , 200 , 50);
-
+        Scene scene = new Scene(new MainPane(), ViewConstant.WINDOW_WIDTH , ViewConstant.WINDOW_HEIGHT);
+        scene.setFill(Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.setTitle("NATS-UI");
-        primaryStage.show();
-        primaryStage.setHeight(600);
-        primaryStage.setWidth(900);
+        primaryStage.setHeight(ViewConstant.WINDOW_HEIGHT);
+        primaryStage.setWidth(ViewConstant.WINDOW_WIDTH);
+        primaryStage.setMinHeight(ViewConstant.WINDOW_HEIGHT);
+        primaryStage.setMinWidth(ViewConstant.WINDOW_WIDTH);
         primaryStage.getIcons().add(new Image(ViewConstant.LOGO));
-
+        primaryStage.show();
         log.info("start...");
 
-        primaryStage.setOnCloseRequest(event ->{
-            event.consume();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("退出程序");
-            alert.setHeaderText("xxxx");
-            alert.setContentText("是否退出程序");
-            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
-            alertStage.getIcons().add(new Image(ViewConstant.LOGO));
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK){
-                Platform.exit();
-            }
-        });
+//        primaryStage.setOnCloseRequest(event ->{
+//            event.consume();
+//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//            alert.setTitle("退出程序");
+//            alert.setHeaderText("xxxx");
+//            alert.setContentText("是否退出程序");
+//            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+//            alertStage.getIcons().add(new Image(ViewConstant.LOGO));
+//
+//            Optional<ButtonType> result = alert.showAndWait();
+//            if (result.get() == ButtonType.OK){
+//                Platform.exit();
+//            }
+//        });
     }
 }
