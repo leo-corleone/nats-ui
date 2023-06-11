@@ -11,7 +11,8 @@ public class MainPane extends BorderPane {
 
 
     public MainPane() {
-        setCenter(new CenterPane());
-        setLeft(new LeftPane());
+        CenterPane centerPane = new CenterPane();
+        setCenter(centerPane);
+        setLeft(new LeftPane(this , centerPane));
     }
 }

@@ -4,6 +4,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import org.suen.component.AddConnectionLabel;
 import org.suen.component.ConnectionLabel;
+import org.suen.controller.ConnectViewController;
 
 /**
  * @author: suen
@@ -12,14 +13,23 @@ import org.suen.component.ConnectionLabel;
  **/
 public class LeftPane extends GridPane {
 
-    public LeftPane() {
+    private ConnectViewController controller;
+
+    public LeftPane(MainPane mainPane , CenterPane centerPane) {
+        controller = new ConnectViewController();
+        controller.setCenterPane(centerPane);
+        controller.setLeftPane(this);
+        controller.setMainPane(mainPane);
         setStyle("-fx-background-color: #2d4048 ; -fx-min-width: 80px");
         addLabel();
     }
 
     private void addLabel(){
-       getChildren().add(new ConnectionLabel());
+        ConnectionLabel connectionLabel = new ConnectionLabel();
+        getChildren().add(connectionLabel);
         getChildren().add(new AddConnectionLabel());
+        controller.setConnectionLabel(connectionLabel);
+        controller.addConnectEvent();
     }
 
 

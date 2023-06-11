@@ -35,10 +35,6 @@ public class ConnectionLabel extends Label {
        setGraphic(imageView);
        setTranslateY(POSITION_Y);
        setTranslateX(POSITION_X);
-       setEventHandler(MouseEvent.MOUSE_CLICKED , event -> changeIcon());
     }
 
-    private void changeIcon(){
-
-    }
 }
