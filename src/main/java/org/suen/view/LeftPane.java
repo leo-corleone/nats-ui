@@ -1,6 +1,5 @@
 package org.suen.view;
 
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import org.suen.component.AddConnectionLabel;
 import org.suen.component.ConnectionLabel;
@@ -29,7 +28,7 @@ public class LeftPane extends GridPane {
         getChildren().add(connectionLabel);
         getChildren().add(new AddConnectionLabel());
         controller.setConnectionLabel(connectionLabel);
-        controller.addConnectEvent();
+        controller.mouseClickAddConnectPane();
     }
 
 

@@ -1,10 +1,9 @@
 package org.suen.controller;
 
-import javafx.event.EventType;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.suen.component.AddConnectionLabel;
 import org.suen.component.ConnectionLabel;
 import org.suen.view.CenterPane;
 import org.suen.view.LeftPane;
@@ -32,8 +31,14 @@ public class ConnectViewController {
     private ConnectionLabel connectionLabel;
 
 
-    public void addConnectEvent(){
+    /**
+     * 鼠标点击 添加连接面板
+     */
+    public void mouseClickAddConnectPane(){
         connectionLabel.addEventFilter(MouseEvent.MOUSE_CLICKED , (event)->{
+            BorderPane borderPane = new BorderPane();
+            borderPane.setStyle("-fx-background-color: #454512");
+            mainPane.setCenter(borderPane);
             log.info("mouse click...");
         });
     }
