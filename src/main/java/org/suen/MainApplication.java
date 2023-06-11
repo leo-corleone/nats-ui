@@ -4,13 +4,10 @@ package org.suen;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.suen.constant.ViewConstant;
-import org.suen.view.LeftPane;
-import org.suen.view.CenterPane;
 import org.suen.view.MainPane;
 
 @Slf4j
@@ -43,23 +40,8 @@ public class MainApplication extends Application {
         primaryStage.setWidth(ViewConstant.WINDOW_WIDTH);
         primaryStage.setMinHeight(ViewConstant.WINDOW_HEIGHT);
         primaryStage.setMinWidth(ViewConstant.WINDOW_WIDTH);
-        primaryStage.getIcons().add(new Image(ViewConstant.LOGO));
+        primaryStage.getIcons().add(new Image(ViewConstant.LOGO_ICON));
         primaryStage.show();
         log.info("start...");
-
-//        primaryStage.setOnCloseRequest(event ->{
-//            event.consume();
-//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//            alert.setTitle("退出程序");
-//            alert.setHeaderText("xxxx");
-//            alert.setContentText("是否退出程序");
-//            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
-//            alertStage.getIcons().add(new Image(ViewConstant.LOGO));
-//
-//            Optional<ButtonType> result = alert.showAndWait();
-//            if (result.get() == ButtonType.OK){
-//                Platform.exit();
-//            }
-//        });
     }
 }

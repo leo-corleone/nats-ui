@@ -8,6 +8,8 @@ import javafx.scene.layout.BorderPane;
  * @description: 主面板
  **/
 public class MainPane extends BorderPane {
+
+
     public MainPane() {
         setCenter(new CenterPane());
         setLeft(new LeftPane());
