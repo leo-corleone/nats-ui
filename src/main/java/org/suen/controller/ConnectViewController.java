@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.suen.component.ConnectionLabel;
 import org.suen.view.CenterPane;
+import org.suen.view.ConnectPane;
 import org.suen.view.LeftPane;
 import org.suen.view.MainPane;
 
@@ -21,7 +22,6 @@ import org.suen.view.MainPane;
 @Slf4j
 public class ConnectViewController {
 
-
     private MainPane mainPane;
 
     private LeftPane leftPane;
@@ -30,15 +30,16 @@ public class ConnectViewController {
 
     private ConnectionLabel connectionLabel;
 
+    private ConnectPane connectPane = new ConnectPane();
+
+
 
     /**
      * 鼠标点击 添加连接面板
      */
     public void mouseClickAddConnectPane(){
         connectionLabel.addEventFilter(MouseEvent.MOUSE_CLICKED , (event)->{
-            BorderPane borderPane = new BorderPane();
-            borderPane.setStyle("-fx-background-color: #454512");
-            mainPane.setCenter(borderPane);
+            mainPane.setCenter(connectPane);
             log.info("mouse click...");
         });
     }

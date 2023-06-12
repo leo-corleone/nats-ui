@@ -1,17 +1,27 @@
 package org.suen;
 
 
+import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.suen.constant.ViewConstant;
 import org.suen.view.MainPane;
 
+import javax.annotation.Resource;
+
 @Slf4j
+
 public class MainApplication extends Application {
+
+
+
     public static void main(String[] args) {
         launch(args);
     }

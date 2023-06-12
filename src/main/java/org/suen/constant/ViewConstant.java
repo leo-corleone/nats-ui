@@ -25,6 +25,13 @@ public class ViewConstant {
      */
     public static final String ADD_ICON = "/image/add.png";
 
+
+
+    /***
+     * 日志图标
+     */
+    public static final String LOG_ICON = "/image/log.png";
+
     /**
      * 窗口宽度
      */
@@ -34,4 +41,15 @@ public class ViewConstant {
      * 窗口高度
      */
     public static final int WINDOW_HEIGHT = 600;
+
+
+    /**
+     * 照片宽
+     */
+    public static final int IMAGE_WIDTH = 20;
+
+    /**
+     * 照片高
+     */
+    public static final int IMAGE_HEIGHT = 20;
 }
