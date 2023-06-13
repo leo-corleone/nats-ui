@@ -1,5 +1,6 @@
 package org.suen.component;
 
+import javafx.scene.ImageCursor;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import lombok.extern.slf4j.Slf4j;
