@@ -1,7 +1,6 @@
 package org.suen;
 
 
-import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,17 +9,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.io.ClassPathResource;
 import org.suen.constant.ViewConstant;
-import org.suen.view.MainPane;
-
-import javax.annotation.Resource;
 
 @Slf4j
-
 public class MainApplication extends Application {
 
 
@@ -48,14 +40,14 @@ public class MainApplication extends Application {
         Pane root = FXMLLoader.load(new ClassPathResource("fx-config.fxml").getURL());
 
         Scene scene = new Scene(root, ViewConstant.WINDOW_WIDTH , ViewConstant.WINDOW_HEIGHT);
-//        scene.setFill(Color.BLACK);
+        scene.setFill(Color.BLACK);
         primaryStage.setScene(scene);
-//        primaryStage.setTitle("NATS-UI");
-//        primaryStage.setHeight(ViewConstant.WINDOW_HEIGHT);
-//        primaryStage.setWidth(ViewConstant.WINDOW_WIDTH);
-//        primaryStage.setMinHeight(ViewConstant.WINDOW_HEIGHT);
-//        primaryStage.setMinWidth(ViewConstant.WINDOW_WIDTH);
-//        primaryStage.getIcons().add(new Image(ViewConstant.LOGO_ICON));
+        primaryStage.setTitle("NATS-UI");
+        primaryStage.setHeight(ViewConstant.WINDOW_HEIGHT);
+        primaryStage.setWidth(ViewConstant.WINDOW_WIDTH);
+        primaryStage.setMinHeight(ViewConstant.WINDOW_HEIGHT);
+        primaryStage.setMinWidth(ViewConstant.WINDOW_WIDTH);
+        primaryStage.getIcons().add(new Image(ViewConstant.LOGO_ICON));
         primaryStage.show();
         log.info("start...");
     }

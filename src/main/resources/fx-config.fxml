@@ -5,18 +5,41 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-                xmlns:fx="http://javafx.com/fxml"
-                prefHeight="400.0" prefWidth="600.0">
-
-        <Label text="Hello World"  minWidth="20" minHeight="5" layoutX="150" layoutY="200">
-            <!--                  <graphic>-->
-            <!--                      <ImageView layoutX="30" layoutY="20" fitHeight="30" fitWidth="20">-->
-            <!--                          /image/add.png-->
-            <!--                      </ImageView>-->
-            <!--                  </graphic>-->
-        </Label>
-        <Button text="向上移动" minWidth="20" minHeight="5" layoutY="260" layoutX="250">
-
-        </Button>
-</AnchorPane>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:id="mainPane"
+            fx:controller="org.suen.controller.LeftPaneViewController">
+       <left>
+           <AnchorPane style="-fx-background-color: #2d4048 ; -fx-min-width: 80px">
+               <Label fx:id="connectLabel"  minWidth="30" minHeight="30" translateX="25" translateY="130">
+                   <graphic>
+                       <ImageView  fitHeight="30" fitWidth="30">
+                           <image>
+                               <Image url="image/connect.png"></Image>
+                           </image>
+                       </ImageView>
+                   </graphic>
+               </Label>
+               <Label  minWidth="30" minHeight="30" translateX="25" translateY="230">
+                   <graphic>
+                       <ImageView  fitHeight="30" fitWidth="30">
+                           <image>
+                               <Image url="image/add.png"></Image>
+                           </image>
+                       </ImageView>
+                   </graphic>
+               </Label>
+               <Label  minWidth="30" minHeight="30" translateX="25" translateY="330">
+                   <graphic>
+                       <ImageView  fitHeight="30" fitWidth="30">
+                           <image>
+                               <Image url="image/log.png"></Image>
+                           </image>
+                       </ImageView>
+                   </graphic>
+               </Label>
+           </AnchorPane>
+       </left>
+</BorderPane>
