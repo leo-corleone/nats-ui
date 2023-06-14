@@ -37,7 +37,8 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Pane root = FXMLLoader.load(new ClassPathResource("fx-config.fxml").getURL());
+        Pane root = FXMLLoader.load(new ClassPathResource("fx-config-main.fxml").getURL());
+
 
         Scene scene = new Scene(root, ViewConstant.WINDOW_WIDTH , ViewConstant.WINDOW_HEIGHT);
         scene.setFill(Color.BLACK);

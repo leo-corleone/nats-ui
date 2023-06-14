@@ -10,30 +10,30 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:id="mainPane"
-            fx:controller="org.suen.controller.LeftPaneViewController">
+            fx:controller="org.suen.controller.ViewMainController">
        <left>
-           <AnchorPane style="-fx-background-color: #2d4048 ; -fx-min-width: 80px">
-               <Label fx:id="connectLabel"  minWidth="30" minHeight="30" translateX="25" translateY="130">
+           <AnchorPane style="-fx-background-color: #57955c ; -fx-min-width: 80px">
+               <Label fx:id="connectLbl" onMouseClicked="#onConnectView" onMouseEntered="#onHover" onMouseExited="#onLeave" minWidth="30" minHeight="30" translateX="30" translateY="130">
                    <graphic>
-                       <ImageView  fitHeight="30" fitWidth="30">
+                       <ImageView  fitHeight="20" fitWidth="20">
                            <image>
                                <Image url="image/connect.png"></Image>
                            </image>
                        </ImageView>
                    </graphic>
                </Label>
-               <Label  minWidth="30" minHeight="30" translateX="25" translateY="230">
+               <Label fx:id="addLbl"  onMouseEntered="#onHover" onMouseExited="#onLeave"  minWidth="30" minHeight="30" translateX="30" translateY="230">
                    <graphic>
-                       <ImageView  fitHeight="30" fitWidth="30">
+                       <ImageView  fitHeight="20" fitWidth="20">
                            <image>
                                <Image url="image/add.png"></Image>
                            </image>
                        </ImageView>
                    </graphic>
                </Label>
-               <Label  minWidth="30" minHeight="30" translateX="25" translateY="330">
+               <Label fx:id="logLbl"  onMouseEntered="#onHover" onMouseExited="#onLeave" minWidth="30" minHeight="30" translateX="30" translateY="330">
                    <graphic>
-                       <ImageView  fitHeight="30" fitWidth="30">
+                       <ImageView  fitHeight="20" fitWidth="20">
                            <image>
                                <Image url="image/log.png"></Image>
                            </image>
