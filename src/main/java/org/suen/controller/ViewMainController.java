@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
@@ -41,6 +43,7 @@ public class ViewMainController {
     }
 
     public void onConnectView(){
+
         try {
             Pane root = FXMLLoader.load(new ClassPathResource("fx-config-connect.fxml").getURL());
             mainPane.setCenter(root);

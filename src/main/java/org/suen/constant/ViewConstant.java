@@ -35,7 +35,7 @@ public class ViewConstant {
     /**
      * 窗口宽度
      */
-    public static final int WINDOW_WIDTH = 1100;
+    public static final int WINDOW_WIDTH = 1000;
 
     /**
      * 窗口高度
