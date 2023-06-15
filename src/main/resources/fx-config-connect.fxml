@@ -49,7 +49,7 @@
                    <TextField style="-fx-border-radius: 50px" minWidth="220" translateX="200" translateY="135"></TextField>
                    <Label style="-fx-text-fill: black;" text="Pwd"  translateX="150" translateY="170"></Label>
                    <TextField style="-fx-border-radius: 50px" minWidth="220" translateX="200" translateY="165"></TextField>
-                   <Button text="连接" minWidth="200" minHeight="30" translateX="190" translateY="250" style="-fx-background-color: #57955c; -fx-text-fill: #FFF; -fx-border-radius: 20px; -fx-font-family: '楷体'">
+                   <Button text="连接" minWidth="200" minHeight="30" translateX="190" translateY="250" style="-fx-background-color: #36d388; -fx-text-fill: #FFF; -fx-border-radius: 20px; -fx-font-family: '楷体'">
                    </Button>
                 </AnchorPane>
             </center>

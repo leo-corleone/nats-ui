@@ -6,4 +6,7 @@ package org.suen.controller;
  * @description:
  **/
 public class ViewConnectController {
+
+
+
 }
