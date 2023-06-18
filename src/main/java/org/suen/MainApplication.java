@@ -1,46 +1,49 @@
 package org.suen;
 
 
+import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.suen.constant.ViewConstant;
+import org.suen.util.FXMLLoaderUtil;
 
 @Slf4j
+@SpringBootApplication
 public class MainApplication extends Application {
 
 
+    private   static  ApplicationContext applicationContext;
 
     public static void main(String[] args) {
-        launch(args);
+        applicationContext = SpringApplication.run(MainApplication.class, args);
+        Application.launch(args);
     }
 
 
     @Override
     public void init() throws Exception {
-        super.init();
         log.info("init...");
     }
 
     @Override
     public void stop() throws Exception {
-        super.stop();
         log.info("stop...");
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        Pane root = FXMLLoader.load(new ClassPathResource("fx-config-main.fxml").getURL());
-
-
-        Scene scene = new Scene(root, ViewConstant.WINDOW_WIDTH , ViewConstant.WINDOW_HEIGHT);
+        Scene scene = new Scene(FXMLLoaderUtil.getParent("fx-config-main.fxml"), ViewConstant.WINDOW_WIDTH , ViewConstant.WINDOW_HEIGHT);
         scene.setFill(Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.setTitle("NATS-UI");
@@ -51,5 +54,10 @@ public class MainApplication extends Application {
         primaryStage.getIcons().add(new Image(ViewConstant.LOGO_ICON));
         primaryStage.show();
         log.info("start...");
+    }
+
+
+    public static ApplicationContext getApplicationContext() {
+        return applicationContext;
     }
 }

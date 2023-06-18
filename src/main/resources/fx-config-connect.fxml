@@ -12,7 +12,7 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.suen.controller.ViewConnectController"
-            prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFF">
+            fx:id="mainControlPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFF">
     <left>
         <AnchorPane minWidth="200" style="-fx-background-color: #FFF">
             <effect>
@@ -28,9 +28,9 @@
         </AnchorPane>
     </left>
     <center>
-        <BorderPane style="-fx-background-color: #b4adad;" translateX="10">
+        <BorderPane fx:id="mainCtlConnectPane" style="-fx-background-color: #b4adad;" translateX="10">
             <top>
-                <AnchorPane style="-fx-background-color: #FFF ;" translateX="0" translateY="0" minHeight="80">
+                <AnchorPane  style="-fx-background-color: #FFF ;" translateX="0" translateY="0" minHeight="80">
                     <Label text="New a Connection"  style="-fx-text-fill: black; -fx-border-radius:5px ;-fx-font-family: 'Microsoft YaHei UI';" translateY="40" translateX="250">
                         <font>
                             <Font size="20">
@@ -41,15 +41,15 @@
             </top>
             <center>
                 <AnchorPane style="-fx-background-color: #FFF ;"  translateX="0" translateY="20">
-                   <Label style="-fx-text-fill: black;" text="Host" translateX="150" translateY="80"></Label>
-                   <TextField style="-fx-border-radius: 50px" minWidth="220" translateX="200" translateY="75"></TextField>
-                   <Label style="-fx-text-fill: black;" text="Port" translateX="150" translateY="110"></Label>
-                   <TextField style="-fx-border-radius: 50px" minWidth="220" translateX="200" translateY="105"></TextField>
-                   <Label style="-fx-text-fill: black;" text="Name" translateX="150" translateY="140"></Label>
-                   <TextField style="-fx-border-radius: 50px" minWidth="220" translateX="200" translateY="135"></TextField>
-                   <Label style="-fx-text-fill: black;" text="Pwd"  translateX="150" translateY="170"></Label>
-                   <TextField style="-fx-border-radius: 50px" minWidth="220" translateX="200" translateY="165"></TextField>
-                   <Button text="连接" minWidth="200" minHeight="30" translateX="190" translateY="250" style="-fx-background-color: #36d388; -fx-text-fill: #FFF; -fx-border-radius: 20px; -fx-font-family: '楷体'">
+                   <Label fx:id="hostLbl" style="-fx-text-fill: black;" text="Host" translateX="150" translateY="80"></Label>
+                   <TextField fx:id="hostField" style="-fx-border-radius: 50px" minWidth="220" translateX="200" translateY="75"></TextField>
+                   <Label fx:id="portLbl" style="-fx-text-fill: black;" text="Port" translateX="150" translateY="110"></Label>
+                   <TextField fx:id="portField" style="-fx-border-radius: 50px" minWidth="220" translateX="200" translateY="105"></TextField>
+                   <Label fx:id="nameLbl" style="-fx-text-fill: black;" text="Name" translateX="150" translateY="140"></Label>
+                   <TextField fx:id="nameField" style="-fx-border-radius: 50px" minWidth="220" translateX="200" translateY="135"></TextField>
+                   <Label fx:id="pwdLbl" style="-fx-text-fill: black;" text="Pwd"  translateX="150" translateY="170"></Label>
+                   <PasswordField  fx:id="pwdField" style="-fx-border-radius: 50px" minWidth="220" translateX="200" translateY="165"></PasswordField>
+                   <Button fx:id="connectBtn" onMouseClicked="#onConnect" text="连接" minWidth="200" minHeight="30" translateX="190" translateY="250" style="-fx-background-color: #36d388; -fx-text-fill: #FFF; -fx-border-radius: 20px; -fx-font-family: '楷体'">
                    </Button>
                 </AnchorPane>
             </center>

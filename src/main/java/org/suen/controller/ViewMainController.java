@@ -1,20 +1,23 @@
 package org.suen.controller;
 
-import javafx.event.ActionEvent;
+import cn.hutool.extra.spring.SpringUtil;
+import de.felixroske.jfxsupport.FXMLController;
 import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.suen.service.NatsConnectionService;
+import org.suen.util.FXMLLoaderUtil;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 
 /**
@@ -24,8 +27,12 @@ import java.io.IOException;
  **/
 @Data
 @Slf4j
+@Component
 public class ViewMainController {
 
+
+    @Resource
+    NatsConnectionService connectionService;
 
     @FXML
     BorderPane mainPane;
@@ -33,23 +40,25 @@ public class ViewMainController {
     @FXML
     Label connectLbl;
 
+
+    Pane connectPane;
+
     @FXML
     Label addLbl;
     @FXML
     Label logLbl;
 
+
     public void initialize(){
-        log.info("initial...");
+
     }
 
     public void onConnectView(){
 
-        try {
-            Pane root = FXMLLoader.load(new ClassPathResource("fx-config-connect.fxml").getURL());
-            mainPane.setCenter(root);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (connectPane == null) {
+            connectPane = (Pane) FXMLLoaderUtil.getParent("fx-config-connect.fxml");
         }
+        mainPane.setCenter(connectPane);
     }
 
 
