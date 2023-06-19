@@ -29,7 +29,7 @@
                   </ImageView>
               </graphic>
           </Label>
-           <Label text="Back >" style="-fx-text-fill: #93c793" translateX="850" translateY="20" minWidth="30" minHeight="30">
+           <Label text="Back >" style="-fx-text-fill: #93c793" onMouseClicked="#onBackToLogin" translateX="850" translateY="20" minWidth="30" minHeight="30">
            </Label>
        </AnchorPane>
    </top>

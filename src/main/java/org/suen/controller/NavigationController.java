@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.suen.util.FXMLLoaderUtil;
 
@@ -25,6 +26,8 @@ public class NavigationController {
     BorderPane mainPane;
 
     Pane loginPane;
+
+    Pane orginalLoginPane;
 
 
     public void initialize(){
@@ -54,5 +57,10 @@ public class NavigationController {
         }
     }
 
+
+    public void onBackTOLogin(){
+        loginPane = null;
+        onLogin();
+    }
 
 }

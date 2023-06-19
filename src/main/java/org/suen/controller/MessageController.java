@@ -19,4 +19,11 @@ public class MessageController {
     @Resource
     private MessageService messageService;
 
+    @Resource
+    private NavigationController navigationController;
+
+    public void onBackToLogin(){
+        navigationController.onBackTOLogin();
+    }
+
 }
