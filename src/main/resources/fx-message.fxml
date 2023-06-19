@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.suen.controller.MessageController"
+            prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: gray">
+   <top>
+       <AnchorPane minWidth="600" style="-fx-background-color: #FFF" minHeight="50">
+          <Label text="user@127.0.0.1:4222" style="-fx-text-fill: green" translateX="10" translateY="22.5"></Label>
+          <Label  translateX="810" translateY="20" minWidth="30" minHeight="30">
+              <BorderPane.margin>
+                  <Insets right="10">
+                  </Insets>
+              </BorderPane.margin>
+              <graphic>
+                  <ImageView fitHeight="20" fitWidth="20">
+                      <image>
+                          <Image url="image/on.png"></Image>
+                      </image>
+                  </ImageView>
+              </graphic>
+          </Label>
+           <Label text="Back >" style="-fx-text-fill: #93c793" translateX="850" translateY="20" minWidth="30" minHeight="30">
+           </Label>
+       </AnchorPane>
+   </top>
+   <center>
+       <AnchorPane style="-fx-background-color: #FFF" translateY="10">
+
+       </AnchorPane>
+   </center>
+</BorderPane>

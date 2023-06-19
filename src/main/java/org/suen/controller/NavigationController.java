@@ -1,24 +1,15 @@
 package org.suen.controller;
 
-import cn.hutool.extra.spring.SpringUtil;
-import de.felixroske.jfxsupport.FXMLController;
 import javafx.event.EventTarget;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.suen.service.NatsConnectionService;
 import org.suen.util.FXMLLoaderUtil;
-
-import javax.annotation.Resource;
-import java.io.IOException;
 
 /**
  * @author: suen
@@ -28,37 +19,23 @@ import java.io.IOException;
 @Data
 @Slf4j
 @Component
-public class ViewMainController {
-
-
-    @Resource
-    NatsConnectionService connectionService;
+public class NavigationController {
 
     @FXML
     BorderPane mainPane;
 
-    @FXML
-    Label connectLbl;
-
-
-    Pane connectPane;
-
-    @FXML
-    Label addLbl;
-    @FXML
-    Label logLbl;
+    Pane loginPane;
 
 
     public void initialize(){
 
     }
 
-    public void onConnectView(){
-
-        if (connectPane == null) {
-            connectPane = (Pane) FXMLLoaderUtil.getParent("fx-config-connect.fxml");
+    public void onLogin(){
+        if (loginPane == null) {
+            loginPane = (Pane) FXMLLoaderUtil.getParent("fx-login.fxml");
         }
-        mainPane.setCenter(connectPane);
+        mainPane.setCenter(loginPane);
     }
 
 

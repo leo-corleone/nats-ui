@@ -10,10 +10,10 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:id="mainPane"
-            fx:controller="org.suen.controller.ViewMainController">
+            fx:controller="org.suen.controller.NavigationController">
        <left>
            <AnchorPane style="-fx-background-color: #57955c ; -fx-min-width: 80px">
-               <Label fx:id="connectLbl" onMouseClicked="#onConnectView" onMouseEntered="#onHover" onMouseExited="#onLeave" minWidth="30" minHeight="30" translateX="30" translateY="130">
+               <Label fx:id="connectLbl" onMouseClicked="#onLogin" onMouseEntered="#onHover" onMouseExited="#onLeave" minWidth="30" minHeight="30" translateX="30" translateY="130">
                    <graphic>
                        <ImageView  fitHeight="20" fitWidth="20">
                            <image>
@@ -26,7 +26,7 @@
                    <graphic>
                        <ImageView  fitHeight="20" fitWidth="20">
                            <image>
-                               <Image url="image/add.png"></Image>
+                               <Image url="image/monitor.png"></Image>
                            </image>
                        </ImageView>
                    </graphic>

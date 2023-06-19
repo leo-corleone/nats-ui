@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import io.nats.client.*;
 import io.nats.client.impl.NatsMessage;
 import io.nats.client.support.NatsConstants;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.stereotype.Component;
 import org.suen.exception.BusinessException;
 import org.suen.exception.Error;
 import org.suen.nats.listener.NatsConnectionListener;
@@ -21,7 +23,9 @@ import java.util.concurrent.TimeoutException;
  * @time: 2023/6/16
  * @description:
  **/
-public class NatsClient {
+
+@Component
+public class NatsClient implements DisposableBean {
 
 
     private Connection nc;
@@ -72,6 +76,7 @@ public class NatsClient {
     }
 
 
+    @Override
     public void destroy(){
         if (isActive()){
             try {
