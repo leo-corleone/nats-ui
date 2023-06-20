@@ -127,10 +127,10 @@ public class MessageController  implements Initializable {
         new Thread(()->{
             while (true){
                 if (natsClient.isActive()){
-                    imageView.setImage(new Image("image/on.png"));
+                    imageView.setImage(new Image("image/off.png"));
                     tooltip.setText("点击关闭连接");
                 }else{
-                    imageView.setImage(new Image("image/off.png"));
+                    imageView.setImage(new Image("image/on.png"));
                     tooltip.setText("点击连接");
                 }
                 try {

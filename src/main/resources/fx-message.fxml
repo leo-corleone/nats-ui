@@ -37,21 +37,28 @@
        </AnchorPane>
    </top>
    <left>
-       <AnchorPane style="-fx-background-color: #FFF" minWidth="200" translateY="10">
+       <AnchorPane style="-fx-background-color: #FFF" minWidth="200" translateY="1">
            <effect>
-               <DropShadow offsetX="3" radius="3" spread="0.1" color="#36d388">
+               <DropShadow offsetX="3" radius="3" spread="0.1" color="#e6e8f1">
                </DropShadow>
            </effect>
-           <Label text="Subscriptions" style="-fx-text-fill: BLACK;">
+           <Label text="+ New Subscription" translateY="10" translateX="10" minWidth="180" minHeight="30" style="-fx-text-fill: #34c287;-fx-border-radius: 10px ; -fx-arrows-visible: true;-fx-border-width: 1;-fx-border-color: #34c287">
                <font>
-                   <Font name="楷体" size="20" >
+                   <Font size="15" >
                    </Font>
                </font>
+               <graphic>
+                   <ImageView fitWidth="20" fitHeight="20">
+                       <image>
+                           <Image url="image/add.png"></Image>
+                       </image>
+                   </ImageView>
+               </graphic>
            </Label>
        </AnchorPane>
    </left>
    <center>
-       <AnchorPane style="-fx-background-color: #FFF" translateY="10" translateX="5">
+       <AnchorPane style="-fx-background-color: #FFF" translateY="1" translateX="5">
        </AnchorPane>
    </center>
 </BorderPane>
