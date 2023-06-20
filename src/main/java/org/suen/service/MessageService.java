@@ -1,5 +1,6 @@
 package org.suen.service;
 
+import lombok.Data;
 import org.springframework.stereotype.Service;
 import org.suen.domain.Login;
 
@@ -9,16 +10,11 @@ import org.suen.domain.Login;
  * @description:
  **/
 
+@Data
 @Service
 public class MessageService {
 
     private Login login;
-
-
-
-    public void  setLogin(Login login){
-        this.login = login;
-    }
 
 
 }

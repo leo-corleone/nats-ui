@@ -9,33 +9,49 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.text.Font?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.suen.controller.MessageController"
             prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: gray">
    <top>
        <AnchorPane minWidth="600" style="-fx-background-color: #FFF" minHeight="50">
-          <Label text="user@127.0.0.1:4222" style="-fx-text-fill: green" translateX="10" translateY="22.5"></Label>
-          <Label  translateX="810" translateY="20" minWidth="30" minHeight="30">
+          <Label fx:id="connectTipLbl"  style="-fx-text-fill: green" translateX="400" translateY="22.5"></Label>
+          <Label fx:id="descLbl" text="" style="-fx-text-fill: green" translateX="10" translateY="22.5"></Label>
+          <Label fx:id="statusLbl"  onMouseClicked="#onClick" translateX="810" translateY="20" minWidth="30" minHeight="30">
               <BorderPane.margin>
                   <Insets right="10">
                   </Insets>
               </BorderPane.margin>
-              <graphic>
-                  <ImageView fitHeight="20" fitWidth="20">
-                      <image>
-                          <Image url="image/on.png"></Image>
-                      </image>
-                  </ImageView>
-              </graphic>
+<!--              <graphic>-->
+<!--                  <ImageView fitHeight="20" fitWidth="20">-->
+<!--                      <image>-->
+<!--                          <Image url="image/off.png"></Image>-->
+<!--                      </image>-->
+<!--                  </ImageView>-->
+<!--              </graphic>-->
           </Label>
            <Label text="Back >" style="-fx-text-fill: #93c793" onMouseClicked="#onBackToLogin" translateX="850" translateY="20" minWidth="30" minHeight="30">
            </Label>
        </AnchorPane>
    </top>
+   <left>
+       <AnchorPane style="-fx-background-color: #FFF" minWidth="200" translateY="10">
+           <effect>
+               <DropShadow offsetX="3" radius="3" spread="0.1" color="#36d388">
+               </DropShadow>
+           </effect>
+           <Label text="Subscriptions" style="-fx-text-fill: BLACK;">
+               <font>
+                   <Font name="楷体" size="20" >
+                   </Font>
+               </font>
+           </Label>
+       </AnchorPane>
+   </left>
    <center>
-       <AnchorPane style="-fx-background-color: #FFF" translateY="10">
-
+       <AnchorPane style="-fx-background-color: #FFF" translateY="10" translateX="5">
        </AnchorPane>
    </center>
 </BorderPane>

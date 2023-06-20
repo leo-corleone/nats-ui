@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import lombok.extern.slf4j.Slf4j;
 import org.suen.domain.Login;
+import org.suen.exception.BusinessException;
 import org.suen.service.LoginService;
 import org.suen.util.FXMLLoaderUtil;
 
@@ -73,12 +74,12 @@ public class LoginController {
         login.setUsername(nameField.getText());
         login.setPassword(pwdField.getText());
 
-        if (true) {
-            if (messagePane == null) {
-                messagePane = (Pane) FXMLLoaderUtil.getParent("fx-message.fxml");
-            }
-            mainControlPane.setCenter(messagePane);
+        //            if (loginService.loginNats(login)) {
+        if (messagePane == null) {
+            messagePane = (Pane) FXMLLoaderUtil.getParent("fx-message.fxml");
         }
+        mainControlPane.setCenter(messagePane);
+//            }
 
     }
 

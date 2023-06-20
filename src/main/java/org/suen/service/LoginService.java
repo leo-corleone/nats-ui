@@ -1,6 +1,7 @@
 package org.suen.service;
 
 import org.springframework.stereotype.Service;
+import org.suen.controller.MessageController;
 import org.suen.domain.Login;
 import org.suen.exception.BusinessException;
 import org.suen.exception.Error;
@@ -22,7 +23,7 @@ public class LoginService {
     private  NatsClient natsClient;
 
     @Resource
-    private MessageService messageService;
+    private MessageController messageController;
 
 
     public boolean loginNats(Login login) throws BusinessException {
@@ -33,7 +34,7 @@ public class LoginService {
             throw new BusinessException(Error.IP_NOT_NULL);
         }
         natsClient.init(login.getHost() , Integer.valueOf(login.getPort()) , login.getUsername() , login.getPassword());
-        messageService.setLogin(login);
+        messageController.refreshLogin(login);
         return true;
     }
 
