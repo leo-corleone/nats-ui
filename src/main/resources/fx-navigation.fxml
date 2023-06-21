@@ -12,7 +12,7 @@
             fx:id="mainPane"
             fx:controller="org.suen.controller.NavigationController">
        <left>
-           <AnchorPane style="-fx-background-color: #57955c ; -fx-min-width: 80px">
+           <AnchorPane style="-fx-background-color: #34c287 ; -fx-min-width: 80px">
                <Label fx:id="connectLbl" onMouseClicked="#onLogin" onMouseEntered="#onHover" onMouseExited="#onLeave" minWidth="30" minHeight="30" translateX="30" translateY="130">
                    <graphic>
                        <ImageView  fitHeight="20" fitWidth="20">

@@ -1,13 +1,17 @@
 package org.suen.controller;
 
 import cn.hutool.core.annotation.AnnotationUtil;
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ObjectUtil;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
@@ -68,11 +72,20 @@ public class MessageController  implements Initializable {
 
     private ImageView imageView = new ImageView();
 
+
+    private Image offImage = new Image("image/off.png");
+
+    private Image onImage = new Image("image/on.png");
+
     @PostConstruct
     private void init(){
         refreshStatusImage();
     }
 
+
+    public void onSubscription(MouseEvent event){
+
+    }
 
     public synchronized void onClick(){
         if (natsClient.isActive()){
@@ -107,31 +120,24 @@ public class MessageController  implements Initializable {
     }
 
     public void refreshLogin(Login login) {
-        String desc = "user";
-        if (ObjectUtil.isNotEmpty(login.getUsername())){
-            desc = login.getUsername();
-        };
-        desc += "@"+ login.getHost() +":"+ login.getPort();
         if (descLbl != null){
-            descLbl.setText(desc);
+            descLbl.setText(login.getLoginDesc());
         }
-        userDesc = desc;
+        userDesc = login.getLoginDesc();
         this.login = login;
     }
 
     private void refreshStatusImage(){
-        imageView.setFitWidth(20);
-        imageView.setFitHeight(20);
+        imageView.setFitWidth(15);
+        imageView.setFitHeight(15);
         imageView.setCache(false);
         tooltip.setContentDisplay(ContentDisplay.BOTTOM);
-        new Thread(()->{
+        ThreadUtil.execAsync(()->{
             while (true){
                 if (natsClient.isActive()){
-                    imageView.setImage(new Image("image/off.png"));
-                    tooltip.setText("点击关闭连接");
+                    imageView.setImage(offImage);
                 }else{
-                    imageView.setImage(new Image("image/on.png"));
-                    tooltip.setText("点击连接");
+                    imageView.setImage(onImage);
                 }
                 try {
                     Thread.sleep(500);
@@ -139,13 +145,35 @@ public class MessageController  implements Initializable {
                     throw new RuntimeException(e);
                 }
             }
-        }).start();
+        });
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initComponentData();
+        addImageListener();
+    }
+
+
+    private void initComponentData(){
         statusLbl.setGraphic(imageView);
         statusLbl.setTooltip(tooltip);
         descLbl.setText(userDesc);
+    }
+
+    private void addImageListener(){
+        imageView.imageProperty().addListener((observable, oldValue, newValue) -> {
+            Platform.runLater(()->{
+                if (newValue == onImage){
+                    tooltip.setText("点击连接");
+                    statusLbl.setText("Connect");
+                    statusLbl.setStyle("-fx-text-fill: #fff;-fx-border-radius: 50px ;-fx-alignment: CENTER;-fx-background-radius: 25px; -fx-arrows-visible: true;-fx-border-width: 1;-fx-background-color:#36cb8c ");
+                }else {
+                    tooltip.setText("点击关闭连接");
+                    statusLbl.setText("Disconnect");
+                    statusLbl.setStyle("-fx-text-fill: #fff;-fx-border-radius: 50px ;-fx-alignment: CENTER;-fx-background-radius: 25px; -fx-arrows-visible: true;-fx-border-width: 1;-fx-background-color: #e97070 ");
+                }
+            });
+        });
     }
 }

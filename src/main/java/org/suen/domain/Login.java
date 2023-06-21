@@ -23,4 +23,10 @@ public class Login implements Serializable {
 
 
     private String password;
+
+
+
+    public String getLoginDesc(){
+       return username == null ? "user" : username + "@" + host + ":" + port;
+    }
 }

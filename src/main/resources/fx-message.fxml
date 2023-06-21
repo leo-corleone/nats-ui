@@ -11,6 +11,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.text.Font?>
+<?import javafx.geometry.Pos?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.suen.controller.MessageController"
@@ -19,18 +20,7 @@
        <AnchorPane minWidth="600" style="-fx-background-color: #FFF" minHeight="50">
           <Label fx:id="connectTipLbl"  style="-fx-text-fill: green" translateX="400" translateY="22.5"></Label>
           <Label fx:id="descLbl" text="" style="-fx-text-fill: green" translateX="10" translateY="22.5"></Label>
-          <Label fx:id="statusLbl"  onMouseClicked="#onClick" translateX="810" translateY="20" minWidth="30" minHeight="30">
-              <BorderPane.margin>
-                  <Insets right="10">
-                  </Insets>
-              </BorderPane.margin>
-<!--              <graphic>-->
-<!--                  <ImageView fitHeight="20" fitWidth="20">-->
-<!--                      <image>-->
-<!--                          <Image url="image/off.png"></Image>-->
-<!--                      </image>-->
-<!--                  </ImageView>-->
-<!--              </graphic>-->
+          <Label fx:id="statusLbl"  onMouseClicked="#onClick" translateX="730" translateY="20" minWidth="100" minHeight="25" style="-fx-text-fill: #FFF;-fx-border-radius: 10px ;-fx-alignment: CENTER; -fx-arrows-visible: true;-fx-border-width: 1;">
           </Label>
            <Label text="Back >" style="-fx-text-fill: #93c793" onMouseClicked="#onBackToLogin" translateX="850" translateY="20" minWidth="30" minHeight="30">
            </Label>
@@ -42,9 +32,9 @@
                <DropShadow offsetX="3" radius="3" spread="0.1" color="#e6e8f1">
                </DropShadow>
            </effect>
-           <Label text="+ New Subscription" translateY="10" translateX="10" minWidth="180" minHeight="30" style="-fx-text-fill: #34c287;-fx-border-radius: 10px ; -fx-arrows-visible: true;-fx-border-width: 1;-fx-border-color: #34c287">
+           <Label fx:id="subscribeLbl" onMouseClicked="#onSubscription" text="New Subscription" translateY="10" translateX="15" minWidth="160" minHeight="30" style="-fx-text-fill: #34c287;-fx-border-radius: 10px ;-fx-alignment: CENTER; -fx-arrows-visible: true;-fx-border-width: 1;-fx-border-color: #34c287">
                <font>
-                   <Font size="15" >
+                   <Font size="13" >
                    </Font>
                </font>
                <graphic>
