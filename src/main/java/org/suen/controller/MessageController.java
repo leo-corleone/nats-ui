@@ -14,13 +14,19 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import lombok.Data;
 import org.springframework.context.ApplicationContext;
+import org.suen.component.PublicationHBox;
+import org.suen.component.SubscriptionHBox;
 import org.suen.domain.Login;
 import org.suen.exception.BusinessException;
 import org.suen.nats.NatsClient;
@@ -63,6 +69,16 @@ public class MessageController  implements Initializable {
     @FXML
     Label connectTipLbl;
 
+    @FXML
+    Pane subscriptionPane;
+
+    @FXML
+    Pane msgPane;
+
+
+    @FXML
+    ScrollPane scrollPane;
+
     String userDesc;
 
     private Login login;
@@ -84,6 +100,15 @@ public class MessageController  implements Initializable {
 
 
     public void onSubscription(MouseEvent event){
+
+        SubscriptionHBox subscriptionHBox = new SubscriptionHBox();
+        subscriptionHBox.getChildren().add(new Label("topic:23131232123"));
+
+
+        PublicationHBox publicationHBox = new PublicationHBox();
+        Label label = new Label("topic:dasdasdasdas\nd\nasdasdasd");
+        publicationHBox.getChildren().add(label);
+        msgPane.getChildren().addAll(subscriptionHBox.getComponent() ,publicationHBox.getComponent());
 
     }
 
@@ -151,7 +176,12 @@ public class MessageController  implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initComponentData();
+        initComponentStyle();
         addImageListener();
+    }
+
+    private void initComponentStyle() {
+
     }
 
 
