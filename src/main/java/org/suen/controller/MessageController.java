@@ -178,6 +178,13 @@ public class MessageController  implements Initializable {
         initComponentData();
         initComponentStyle();
         addImageListener();
+        addScrollPaneListener();
+    }
+
+    private void addScrollPaneListener() {
+        msgPane.heightProperty().addListener((observable, oldValue, newValue) -> {
+            scrollPane.setVvalue(scrollPane.getVmax());
+        });
     }
 
     private void initComponentStyle() {
