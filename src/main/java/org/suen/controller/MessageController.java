@@ -12,6 +12,7 @@ import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -62,7 +63,7 @@ public class MessageController  implements Initializable {
 
 
     @FXML
-    Label statusLbl;
+    Button connectBtn;
 
     @FXML
     Label descLbl;
@@ -103,17 +104,17 @@ public class MessageController  implements Initializable {
     public void onSubscription(MouseEvent event){
 
         SubscriptionHBox subscriptionHBox = new SubscriptionHBox();
-        subscriptionHBox.getChildren().add(new Label("topic:23131232123"));
+        subscriptionHBox.setData(new Label("topic:23131232123"));
 
 
         PublicationHBox publicationHBox = new PublicationHBox();
         Label label = new Label("topic:dasdasdasdas\nd\nasdasdasd");
-        publicationHBox.getChildren().add(label);
+        publicationHBox.setData(label);
 
 
         ReplyHBox replyHBox = new ReplyHBox();
         Label label1 = new Label("topic:qweowjdlkjasldjlkasjldjlasds\nd\nasdasdasd");
-        replyHBox.getChildren().add(label1);
+        replyHBox.setData(label1);
 
         msgPane.getChildren().addAll(subscriptionHBox.getComponent() ,publicationHBox.getComponent() , replyHBox.getComponent());
 
@@ -200,8 +201,8 @@ public class MessageController  implements Initializable {
 
 
     private void initComponentData(){
-        statusLbl.setGraphic(imageView);
-        statusLbl.setTooltip(tooltip);
+        connectBtn.setGraphic(imageView);
+        connectBtn.setTooltip(tooltip);
         descLbl.setText(userDesc);
     }
 
@@ -210,12 +211,12 @@ public class MessageController  implements Initializable {
             Platform.runLater(()->{
                 if (newValue == onImage){
                     tooltip.setText("点击连接");
-                    statusLbl.setText("Connect");
-                    statusLbl.setStyle("-fx-text-fill: #fff;-fx-border-radius: 50px ;-fx-alignment: CENTER;-fx-background-radius: 25px; -fx-arrows-visible: true;-fx-border-width: 1;-fx-background-color:#36cb8c ");
+                    connectBtn.setText("Connect");
+                    connectBtn.setStyle("-fx-text-fill: #FFF;-fx-border-radius: 50px ;-fx-alignment: CENTER;-fx-background-radius: 25px; -fx-arrows-visible: true;-fx-border-width: 1;-fx-background-color:#36cb8c ");
                 }else {
                     tooltip.setText("点击关闭连接");
-                    statusLbl.setText("Disconnect");
-                    statusLbl.setStyle("-fx-text-fill: #fff;-fx-border-radius: 50px ;-fx-alignment: CENTER;-fx-background-radius: 25px; -fx-arrows-visible: true;-fx-border-width: 1;-fx-background-color: #e97070 ");
+                    connectBtn.setText("Disconnect");
+                    connectBtn.setStyle("-fx-text-fill: #fff;-fx-border-radius: 50px ;-fx-alignment: CENTER;-fx-background-radius: 25px; -fx-arrows-visible: true;-fx-border-width: 1;-fx-background-color: #e97070 ");
                 }
             });
         });

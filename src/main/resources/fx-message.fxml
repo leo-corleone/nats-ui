@@ -20,13 +20,13 @@
        <AnchorPane minWidth="600" style="-fx-background-color: #FFF" minHeight="50">
           <Label fx:id="connectTipLbl"  style="-fx-text-fill: green" translateX="400" translateY="22.5"></Label>
           <Label fx:id="descLbl" text="" style="-fx-text-fill: green" translateX="10" translateY="22.5"></Label>
-          <Label fx:id="statusLbl" text="Connect"  onMouseClicked="#onClick" translateX="730" translateY="20" minWidth="100" minHeight="25" style="-fx-text-fill: #fff;-fx-border-radius: 50px ;-fx-alignment: CENTER;-fx-background-radius: 25px; -fx-arrows-visible: true;-fx-border-width: 1;-fx-background-color:#36cb8c">
+          <Button fx:id="connectBtn" text="Connect"  onMouseClicked="#onClick" translateX="730" translateY="20" minWidth="100" minHeight="25" style="-fx-text-fill: #fff;-fx-border-radius: 50px ;-fx-alignment: CENTER;-fx-background-radius: 25px; -fx-arrows-visible: true;-fx-border-width: 1;-fx-background-color:#36cb8c">
             <graphic>
                 <ImageView>
                     <Image url="image/on.png"></Image>
                 </ImageView>
             </graphic>
-          </Label>
+          </Button>
            <Label text="Back >" style="-fx-text-fill: #93c793" onMouseClicked="#onBackToLogin" translateX="850" translateY="20" minWidth="30" minHeight="30">
            </Label>
        </AnchorPane>
