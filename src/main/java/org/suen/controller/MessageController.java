@@ -26,6 +26,7 @@ import javafx.scene.paint.Color;
 import lombok.Data;
 import org.springframework.context.ApplicationContext;
 import org.suen.component.PublicationHBox;
+import org.suen.component.ReplyHBox;
 import org.suen.component.SubscriptionHBox;
 import org.suen.domain.Login;
 import org.suen.exception.BusinessException;
@@ -108,7 +109,13 @@ public class MessageController  implements Initializable {
         PublicationHBox publicationHBox = new PublicationHBox();
         Label label = new Label("topic:dasdasdasdas\nd\nasdasdasd");
         publicationHBox.getChildren().add(label);
-        msgPane.getChildren().addAll(subscriptionHBox.getComponent() ,publicationHBox.getComponent());
+
+
+        ReplyHBox replyHBox = new ReplyHBox();
+        Label label1 = new Label("topic:qweowjdlkjasldjlkasjldjlasds\nd\nasdasdasd");
+        replyHBox.getChildren().add(label1);
+
+        msgPane.getChildren().addAll(subscriptionHBox.getComponent() ,publicationHBox.getComponent() , replyHBox.getComponent());
 
     }
 

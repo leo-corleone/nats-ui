@@ -32,6 +32,7 @@ public class PublicationHBox extends HBox {
         outHBox = new HBox();
         outHBox.setMinWidth(670);
         outHBox.setAlignment(Pos.BASELINE_RIGHT);
+        outHBox.setPadding(new Insets(5 , 0 , 5 ,0));
         setAlignment(Pos.BASELINE_RIGHT);
 
         setStyle("-fx-background-color: #79bda0; -fx-border-radius: 5px;-fx-background-radius: 5px; -fx-border-width: 5px; -fx-arrows-visible: true");
