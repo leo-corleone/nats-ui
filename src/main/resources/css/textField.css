@@ -1,0 +1,12 @@
+.text-field{
+    -fx-background-insets: 0;
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text-field .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text-field:focused {
+    -fx-background-color: transparent, white, transparent, white;
+}

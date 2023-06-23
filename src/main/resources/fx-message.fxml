@@ -64,6 +64,16 @@
                 </FlowPane>
             </content>
         </ScrollPane>
+        <Label text="Subject:" textFill="gray" translateY="375" translateX="5"></Label>
+        <TextField fx:id="topicTxt" stylesheets="css/textField.css" style="-fx-border-width: 1px;-fx-arrows-visible: true ;-fx-border-radius: 10px ;-fx-border-color:#34c287" minWidth="520" minHeight="20" translateX="60" translateY="370"></TextField>
+        <Label fx:id="publishLbl" onMouseClicked="#onPublish" translateY="370" translateX="590">
+            <graphic>
+                <ImageView fitHeight="25" fitWidth="25">
+                    <Image url="image/publication.png"></Image>
+                </ImageView>
+            </graphic>
+        </Label>
+        <TextArea fx:id="payloadText" promptText="please input payload..." minWidth="700"  translateX="5" translateY="400"></TextArea>
        </AnchorPane>
    </center>
 </BorderPane>

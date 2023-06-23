@@ -17,6 +17,7 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,6 +28,7 @@ import javafx.scene.paint.Color;
 import lombok.Data;
 import org.springframework.context.ApplicationContext;
 import org.suen.component.PublicationHBox;
+import org.suen.component.PublicationLabel;
 import org.suen.component.ReplyHBox;
 import org.suen.component.SubscriptionHBox;
 import org.suen.domain.Login;
@@ -40,6 +42,7 @@ import javax.annotation.Resource;
 import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 /**
  * @author: suen
@@ -77,9 +80,18 @@ public class MessageController  implements Initializable {
     @FXML
     Pane msgPane;
 
-
     @FXML
     ScrollPane scrollPane;
+
+    @FXML
+    Label publishLbl;
+
+    @FXML
+    TextField topicTxt;
+
+
+    @FXML
+    TextArea payloadText;
 
     String userDesc;
 
@@ -103,21 +115,29 @@ public class MessageController  implements Initializable {
 
     public void onSubscription(MouseEvent event){
 
-        SubscriptionHBox subscriptionHBox = new SubscriptionHBox();
-        subscriptionHBox.setData(new Label("topic:23131232123"));
+    }
 
 
+    public void onPublish(){
+        String topic = topicTxt.getText();
+        if (topic == null || topic.trim().length() == 0){
+            // TODO 提示信息
+            return;
+        }
+        String payloadData = payloadText.getText();
+        String payload = "";
+        if (payloadData != null && payloadData.trim().length() > 0){
+            payload = payloadData;
+        }
+        messageService.publish(topic, payload, data -> {
+            showPublicationData(topic , data);
+        });
+    }
+
+    private void showPublicationData(String subject , String payload){
         PublicationHBox publicationHBox = new PublicationHBox();
-        Label label = new Label("topic:dasdasdasdas\nd\nasdasdasd");
-        publicationHBox.setData(label);
-
-
-        ReplyHBox replyHBox = new ReplyHBox();
-        Label label1 = new Label("topic:qweowjdlkjasldjlkasjldjlasds\nd\nasdasdasd");
-        replyHBox.setData(label1);
-
-        msgPane.getChildren().addAll(subscriptionHBox.getComponent() ,publicationHBox.getComponent() , replyHBox.getComponent());
-
+        publicationHBox.setData(new PublicationLabel(subject , payload));
+        msgPane.getChildren().add(publicationHBox.getComponent());
     }
 
     public synchronized void onClick(){

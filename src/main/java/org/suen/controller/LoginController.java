@@ -74,12 +74,16 @@ public class LoginController {
         login.setUsername(nameField.getText());
         login.setPassword(pwdField.getText());
 
-        //            if (loginService.loginNats(login)) {
-        if (messagePane == null) {
-            messagePane = (Pane) FXMLLoaderUtil.getParent("fx-message.fxml");
+        try {
+            if (loginService.loginNats(login)) {
+                if (messagePane == null) {
+                    messagePane = (Pane) FXMLLoaderUtil.getParent("fx-message.fxml");
+                }
+                mainControlPane.setCenter(messagePane);
+            }
+        } catch (BusinessException e) {
+            loginTipLbl.setText(e.getMsg());
         }
-        mainControlPane.setCenter(messagePane);
-//            }
 
     }
 

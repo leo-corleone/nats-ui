@@ -50,6 +50,7 @@ public class PublicationHBox extends HBox {
         inHBox.setAlignment(Pos.BASELINE_RIGHT);
         inHBox.setPadding(new Insets(5, 0, 5, 0));
         inHBox.getChildren().add(this);
+
     }
 
     private void initImage() {
