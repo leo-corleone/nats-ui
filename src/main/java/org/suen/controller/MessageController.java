@@ -3,8 +3,10 @@ package org.suen.controller;
 import cn.hutool.core.thread.ThreadUtil;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -183,6 +185,8 @@ public class MessageController implements Initializable {
     // 关闭连接
     private void onClose() {
         natsClient.destroy();
+        clearMessagePaneRecord();
+        clearSubscriptionRecord();
     }
 
     // 连接
@@ -199,9 +203,21 @@ public class MessageController implements Initializable {
 
 
     public void onBackToLogin() {
+        clearMessagePaneRecord();
+        clearSubscriptionRecord();
         // 关闭连接
         natsClient.destroy();
         navigationController.onBackTOLogin();
+    }
+
+    private void clearSubscriptionRecord() {
+        ObservableList<Node> children = subRecord.getChildren();
+        children.clear();
+    }
+
+    private void clearMessagePaneRecord() {
+        ObservableList<Node> children = msgPane.getChildren();
+        children.clear();
     }
 
     public void refreshLogin(Login login) {

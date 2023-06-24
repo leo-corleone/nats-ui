@@ -3,7 +3,9 @@ package org.suen.component;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -35,9 +37,11 @@ public class SubscriptionRecord extends HBox {
 
         topicLabel = new Label();
         topicLabel.setTextFill(Color.WHITE);
+        topicLabel.setMaxWidth(130);
+
         setAlignment(Pos.BASELINE_LEFT);
         setMinWidth(150);
-        setMaxHeight(50);
+        setMaxHeight(80);
         setPadding(new Insets(10,10,10,10));
         addUnSubscribeImage();
         getChildren().add(topicLabel);
@@ -69,6 +73,10 @@ public class SubscriptionRecord extends HBox {
 
     public void setTopic(String topic){
         topicLabel.setText(topic);
+        Tooltip tooltip = new Tooltip();
+        tooltip.setText(topic);
+        tooltip.setContentDisplay(ContentDisplay.BOTTOM);
+        topicLabel.setTooltip(tooltip);
     }
 
     public void setNatsClient(NatsClient natsClient){
