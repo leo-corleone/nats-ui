@@ -37,6 +37,7 @@
                <DropShadow offsetX="3" radius="3" spread="0.1" color="#e6e8f1">
                </DropShadow>
            </effect>
+           <children>
            <Label fx:id="subscribeLbl" onMouseClicked="#onSubscription" text="New Subscription" translateY="10" translateX="15" minWidth="160" minHeight="30" style="-fx-text-fill: #34c287;-fx-border-radius: 10px ;-fx-alignment: CENTER; -fx-arrows-visible: true;-fx-border-width: 1;-fx-border-color: #34c287">
                <font>
                    <Font size="13" >
@@ -50,30 +51,42 @@
                    </ImageView>
                </graphic>
            </Label>
+           <ScrollPane fx:id="subScPane" hbarPolicy="NEVER" stylesheets="css/scrollPaneBg.css" style="-fx-background-color: transparent;" prefHeight="460" prefWidth="180" translateX="10" translateY="50">
+               <content>
+                   <VBox fx:id="subRecord" spacing="5" minWidth="170" alignment="TOP_CENTER">
+                       <padding>
+                               <Insets right="10" left="10" top="0" bottom="0"></Insets>
+                       </padding>
+                   </VBox>
+               </content>
+           </ScrollPane>
+           </children>
        </AnchorPane>
    </left>
    <center>
        <AnchorPane  style="-fx-background-color: #FFF" translateY="1" translateX="5">
-        <ScrollPane hbarPolicy="NEVER"  stylesheets="css/scrollPaneTrace.css" vbarPolicy="AS_NEEDED" fx:id="scrollPane"  translateX="5" translateY="10" prefHeight="350" minWidth="700">
-            <content>
-                <FlowPane fx:id="msgPane" style="-fx-background-color: #f7f8fb" minWidth="690">
-                    <padding>
-                        <Insets left="10" right="10" top="5">
-                        </Insets>
-                    </padding>
-                </FlowPane>
-            </content>
-        </ScrollPane>
-        <Label text="Subject:" textFill="gray" translateY="375" translateX="5"></Label>
-        <TextField fx:id="topicTxt" stylesheets="css/textField.css" style="-fx-border-width: 1px;-fx-arrows-visible: true ;-fx-border-radius: 10px ;-fx-border-color:#34c287" minWidth="520" minHeight="20" translateX="60" translateY="370"></TextField>
-        <Label fx:id="publishLbl" onMouseClicked="#onPublish" translateY="370" translateX="590">
-            <graphic>
-                <ImageView fitHeight="25" fitWidth="25">
-                    <Image url="image/publication.png"></Image>
-                </ImageView>
-            </graphic>
-        </Label>
-        <TextArea fx:id="payloadText" promptText="please input payload..." minWidth="700"  translateX="5" translateY="400"></TextArea>
+       <children>
+           <ScrollPane hbarPolicy="NEVER"  stylesheets="css/scrollPaneTrace.css" vbarPolicy="AS_NEEDED" fx:id="scrollPane"  translateX="5" translateY="10" prefHeight="350" minWidth="700">
+               <content>
+                   <FlowPane fx:id="msgPane" style="-fx-background-color: #f7f8fb" minWidth="690">
+                       <padding>
+                           <Insets left="10" right="10" top="5">
+                           </Insets>
+                       </padding>
+                   </FlowPane>
+               </content>
+           </ScrollPane>
+           <Label text="Subject:" textFill="gray" translateY="375" translateX="5"></Label>
+           <TextField fx:id="topicTxt" stylesheets="css/textField.css" style="-fx-border-width: 1px;-fx-arrows-visible: true ;-fx-border-radius: 10px ;-fx-border-color:#34c287" minWidth="520" minHeight="20" translateX="60" translateY="370"></TextField>
+           <Label fx:id="publishLbl" onMouseClicked="#onPublish" translateY="370" translateX="590">
+               <graphic>
+                   <ImageView fitHeight="25" fitWidth="25">
+                       <Image url="image/publication.png"></Image>
+                   </ImageView>
+               </graphic>
+           </Label>
+           <TextArea fx:id="payloadText" promptText="please input payload..." minWidth="700"  translateX="5" translateY="400"></TextArea>
+       </children>
        </AnchorPane>
    </center>
 </BorderPane>

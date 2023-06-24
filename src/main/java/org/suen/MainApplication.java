@@ -7,8 +7,10 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.batch.JobExecutionExitCodeGenerator;
 import org.springframework.context.ApplicationContext;
 import org.suen.constant.ViewConstant;
 import org.suen.util.FXMLLoaderUtil;
@@ -33,6 +35,7 @@ public class MainApplication extends Application {
 
     @Override
     public void stop() throws Exception {
+        SpringApplication.exit(applicationContext, new JobExecutionExitCodeGenerator());
         log.info("stop...");
     }
 

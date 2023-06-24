@@ -1,48 +1,30 @@
 package org.suen.controller;
 
-import cn.hutool.core.annotation.AnnotationUtil;
 import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.core.util.ObjectUtil;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import lombok.Data;
-import org.springframework.context.ApplicationContext;
-import org.suen.component.PublicationHBox;
-import org.suen.component.PublicationLabel;
-import org.suen.component.ReplyHBox;
-import org.suen.component.SubscriptionHBox;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import org.suen.component.*;
 import org.suen.domain.Login;
 import org.suen.exception.BusinessException;
 import org.suen.nats.NatsClient;
-import org.suen.service.LoginService;
 import org.suen.service.MessageService;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.awt.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
-import java.util.function.Consumer;
 
 /**
  * @author: suen
@@ -51,7 +33,7 @@ import java.util.function.Consumer;
  **/
 
 @FXMLController
-public class MessageController  implements Initializable {
+public class MessageController implements Initializable {
 
 
     @Resource
@@ -93,6 +75,15 @@ public class MessageController  implements Initializable {
     @FXML
     TextArea payloadText;
 
+    @FXML
+    VBox subRecord;
+
+
+    @FXML
+    ScrollPane subScPane;
+
+    List<SubscriptionRecord> subscriptionRecordList = new ArrayList<>();
+
     String userDesc;
 
     private Login login;
@@ -108,55 +99,95 @@ public class MessageController  implements Initializable {
     private Image onImage = new Image("image/on.png");
 
     @PostConstruct
-    private void init(){
+    private void init() {
         refreshStatusImage();
     }
 
 
-    public void onSubscription(MouseEvent event){
+    public void onSubscription() {
+        showSubscriptionPane();
+    }
 
+    private void showSubscriptionPane() {
+
+        TextInputDialog inputDialog = new TextInputDialog();
+        inputDialog.setHeight(300);
+        inputDialog.setWidth(500);
+        inputDialog.setGraphic(new ImageView("image/subscribe.png"));
+        Window window = inputDialog.getDialogPane().getScene().getWindow();
+        ((Stage)window).getIcons().add(new Image("image/logo.png"));
+        SubscriptionDialogPane subscriptionDialogPane = new SubscriptionDialogPane();
+        inputDialog.setDialogPane(subscriptionDialogPane);
+        inputDialog.setTitle("New Subscription");
+        inputDialog.show();
+        inputDialog.setResultConverter(buttonType -> {
+
+            if (buttonType.getButtonData() == ButtonBar.ButtonData.OK_DONE){
+                TextField topicField = subscriptionDialogPane.getTopicField();
+                if (topicField.getText() != null && topicField.getText().trim().length() > 0){
+                    ColorPicker colorPicker = subscriptionDialogPane.getColorPicker();
+                    Color color = colorPicker.getValue();
+                    String topic = topicField.getText();
+                    // 1.订阅记录
+                    SubscriptionRecord subscriptionRecord = new SubscriptionRecord();
+                    subscriptionRecord.setTopic(topic);
+                    subscriptionRecord.setBgColor(color);
+                    subscriptionRecord.setParentPane(subRecord);
+                    subRecord.getChildren().add(subscriptionRecord);
+                    messageService.subscribe(topic, message -> Platform.runLater(()->{
+                        // 2.处理对话框记录
+                        String data = new String(message.getData());
+                        String subject = message.getSubject();
+                        SubscriptionHBox subscriptionHBox = new SubscriptionHBox();
+                        subscriptionHBox.setData(new SubscriptionLabel(subject , data));
+                        subscriptionHBox.setBackgroundColor(color);
+                        msgPane.getChildren().add(subscriptionHBox.getComponent());
+                    }));
+                }
+            }
+            return buttonType.getText();});
     }
 
 
-    public void onPublish(){
+    public void onPublish() {
         String topic = topicTxt.getText();
-        if (topic == null || topic.trim().length() == 0){
+        if (topic == null || topic.trim().length() == 0) {
             // TODO 提示信息
             return;
         }
         String payloadData = payloadText.getText();
         String payload = "";
-        if (payloadData != null && payloadData.trim().length() > 0){
+        if (payloadData != null && payloadData.trim().length() > 0) {
             payload = payloadData;
         }
         messageService.publish(topic, payload, data -> {
-            showPublicationData(topic , data);
+            showPublicationData(topic, data);
         });
     }
 
-    private void showPublicationData(String subject , String payload){
+    private void showPublicationData(String subject, String payload) {
         PublicationHBox publicationHBox = new PublicationHBox();
-        publicationHBox.setData(new PublicationLabel(subject , payload));
+        publicationHBox.setData(new PublicationLabel(subject, payload));
         msgPane.getChildren().add(publicationHBox.getComponent());
     }
 
-    public synchronized void onClick(){
-        if (natsClient.isActive()){
+    public synchronized void onClick() {
+        if (natsClient.isActive()) {
             onClose();
-        }else {
+        } else {
             onConnect();
         }
     }
 
     // 关闭连接
-    private void onClose(){
+    private void onClose() {
         natsClient.destroy();
     }
 
     // 连接
-    private void onConnect(){
+    private void onConnect() {
         try {
-            natsClient.init(login.getHost() , Integer.valueOf(login.getPort()) , login.getUsername() , login.getPassword());
+            natsClient.init(login.getHost(), Integer.valueOf(login.getPort()), login.getUsername(), login.getPassword());
             connectTipLbl.setText("");
         } catch (BusinessException e) {
             connectTipLbl.setTextFill(Color.RED);
@@ -166,30 +197,30 @@ public class MessageController  implements Initializable {
     }
 
 
-    public void onBackToLogin(){
+    public void onBackToLogin() {
         // 关闭连接
         natsClient.destroy();
         navigationController.onBackTOLogin();
     }
 
     public void refreshLogin(Login login) {
-        if (descLbl != null){
+        if (descLbl != null) {
             descLbl.setText(login.getLoginDesc());
         }
         userDesc = login.getLoginDesc();
         this.login = login;
     }
 
-    private void refreshStatusImage(){
+    private void refreshStatusImage() {
         imageView.setFitWidth(15);
         imageView.setFitHeight(15);
         imageView.setCache(false);
         tooltip.setContentDisplay(ContentDisplay.BOTTOM);
-        ThreadUtil.execAsync(()->{
-            while (true){
-                if (natsClient.isActive()){
+        ThreadUtil.execAsync(() -> {
+            while (true) {
+                if (natsClient.isActive()) {
                     imageView.setImage(offImage);
-                }else{
+                } else {
                     imageView.setImage(onImage);
                 }
                 try {
@@ -220,20 +251,20 @@ public class MessageController  implements Initializable {
     }
 
 
-    private void initComponentData(){
+    private void initComponentData() {
         connectBtn.setGraphic(imageView);
         connectBtn.setTooltip(tooltip);
         descLbl.setText(userDesc);
     }
 
-    private void addImageListener(){
+    private void addImageListener() {
         imageView.imageProperty().addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(()->{
-                if (newValue == onImage){
+            Platform.runLater(() -> {
+                if (newValue == onImage) {
                     tooltip.setText("点击连接");
                     connectBtn.setText("Connect");
                     connectBtn.setStyle("-fx-text-fill: #FFF;-fx-border-radius: 50px ;-fx-alignment: CENTER;-fx-background-radius: 25px; -fx-arrows-visible: true;-fx-border-width: 1;-fx-background-color:#36cb8c ");
-                }else {
+                } else {
                     tooltip.setText("点击关闭连接");
                     connectBtn.setText("Disconnect");
                     connectBtn.setStyle("-fx-text-fill: #fff;-fx-border-radius: 50px ;-fx-alignment: CENTER;-fx-background-radius: 25px; -fx-arrows-visible: true;-fx-border-width: 1;-fx-background-color: #e97070 ");

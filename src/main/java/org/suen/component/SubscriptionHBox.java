@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import org.suen.util.ColorUtil;
 
 /**
  * @author: suen
@@ -33,7 +34,7 @@ public class SubscriptionHBox extends HBox {
 
     private void initOutVBox() {
         outVBox = new VBox(5);
-        outVBox.setAlignment(Pos.BASELINE_LEFT);
+        outVBox.setAlignment(Pos.TOP_LEFT);
         Label label = new Label(DateUtil.now());
         outVBox.setPadding(new Insets(10 , 0 , 10 , 0));
         label.setTextFill(Color.web("#36cb8c"));
@@ -60,8 +61,8 @@ public class SubscriptionHBox extends HBox {
         getChildren().add(label);
     }
 
-    public void setBackgroundColor(String color) {
-        setStyle("-fx-background-color:" + color);
+    public void setBackgroundColor(Color color) {
+        setStyle("-fx-border-radius: 5px;-fx-background-radius: 5px; -fx-border-width: 5px; -fx-arrows-visible: true;-fx-background-color:" + ColorUtil.toHexString(color));
     }
 
 

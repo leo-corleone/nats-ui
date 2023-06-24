@@ -82,7 +82,7 @@ public class LoginController {
                 mainControlPane.setCenter(messagePane);
             }
         } catch (BusinessException e) {
-            loginTipLbl.setText(e.getMsg());
+            throw new RuntimeException(e);
         }
 
     }

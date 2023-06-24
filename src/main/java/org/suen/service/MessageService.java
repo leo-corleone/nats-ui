@@ -1,6 +1,7 @@
 package org.suen.service;
 
 import io.nats.client.Message;
+import io.nats.client.MessageHandler;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 import org.suen.domain.Login;
@@ -28,8 +29,8 @@ public class MessageService {
         consumer.accept(payload);
     }
 
-    public void subscribe(String subject , Consumer<Message> consumer){
-        natsClient.subscribe(subject , consumer::accept);
+    public void subscribe(String subject , MessageHandler messageHandler){
+        natsClient.subscribe(subject , messageHandler);
     }
 
 
