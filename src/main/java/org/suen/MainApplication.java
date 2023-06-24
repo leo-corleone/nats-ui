@@ -37,6 +37,7 @@ public class MainApplication extends Application {
     public void stop() throws Exception {
         SpringApplication.exit(applicationContext, new JobExecutionExitCodeGenerator());
         log.info("stop...");
+        System.exit(0);
     }
 
     @Override

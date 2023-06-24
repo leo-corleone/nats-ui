@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import org.suen.nats.NatsClient;
 import org.suen.util.ColorUtil;
 
 /**
@@ -27,6 +28,9 @@ public class SubscriptionRecord extends HBox {
 
     private Label topicLabel;
 
+
+    private NatsClient natsClient;
+
     public SubscriptionRecord() {
 
         topicLabel = new Label();
@@ -43,11 +47,12 @@ public class SubscriptionRecord extends HBox {
         Label label = new Label();
         ImageView imageView = new ImageView(new Image("image/unsubscribe.png"));
         imageView.setFitWidth(10);
-        imageView.setFitHeight(10);
+        imageView.setFitHeight(15);
         label.setGraphic(imageView);
         label.setTranslateX(-5);
         label.setTranslateY(-10);
         label.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            natsClient.unsubscribe(topicLabel.getText());
             removeSubscribe();
         });
         getChildren().add(label);
@@ -64,6 +69,10 @@ public class SubscriptionRecord extends HBox {
 
     public void setTopic(String topic){
         topicLabel.setText(topic);
+    }
+
+    public void setNatsClient(NatsClient natsClient){
+        this.natsClient = natsClient;
     }
 
     public void setBgColor(Color color){

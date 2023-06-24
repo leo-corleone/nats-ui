@@ -62,7 +62,8 @@ public class NatsClient implements DisposableBean {
 
     public void unsubscribe(String subject){
         Subscription subscription = subscriptionMap.get(subject);
-        subscription.unsubscribe();
+        dispatcher.unsubscribe(subscription);
+        subscriptionMap.remove(subject);
     }
 
     public void publish(String subject , Object payload){

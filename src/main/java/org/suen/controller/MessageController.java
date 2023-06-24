@@ -133,6 +133,7 @@ public class MessageController implements Initializable {
                     subscriptionRecord.setTopic(topic);
                     subscriptionRecord.setBgColor(color);
                     subscriptionRecord.setParentPane(subRecord);
+                    subscriptionRecord.setNatsClient(natsClient);
                     subRecord.getChildren().add(subscriptionRecord);
                     messageService.subscribe(topic, message -> Platform.runLater(()->{
                         // 2.处理对话框记录
