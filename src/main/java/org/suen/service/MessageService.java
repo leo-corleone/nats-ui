@@ -24,9 +24,9 @@ public class MessageService {
     private NatsClient natsClient;
 
 
-    public void publish(String subject , String payload , Consumer<String> consumer){
+    public void publish(String subject , Object payload , Consumer<String> consumer){
         natsClient.publish(subject , payload);
-        consumer.accept(payload);
+        consumer.accept(payload.toString());
     }
 
     public void subscribe(String subject , MessageHandler messageHandler){

@@ -1,10 +1,12 @@
 package org.suen.component;
 
+import cn.hutool.core.util.ObjectUtil;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
+import org.apache.commons.text.StringEscapeUtils;
 
 /**
  * @author: suen
@@ -25,7 +27,9 @@ public class SubscriptionLabel extends Label {
         this.topic = topic;
         this.data = data;
         String desc = "Topic:" + topic + "\n\n";
-        desc += data;
+        if (ObjectUtil.isNotEmpty(data)){
+            desc += StringEscapeUtils.unescapeJava(data);
+        }
         setText(desc);
         setTextFill(Color.WHITE);
         setMaxWidth(630);

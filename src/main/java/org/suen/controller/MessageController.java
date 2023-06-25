@@ -1,6 +1,7 @@
 package org.suen.controller;
 
 import cn.hutool.core.thread.ThreadUtil;
+import com.alibaba.fastjson.JSONObject;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -15,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import org.apache.commons.text.StringEscapeUtils;
 import org.suen.component.*;
 import org.suen.domain.Login;
 import org.suen.exception.BusinessException;
@@ -24,6 +26,7 @@ import org.suen.service.MessageService;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -139,7 +142,7 @@ public class MessageController implements Initializable {
                     subRecord.getChildren().add(subscriptionRecord);
                     messageService.subscribe(topic, message -> Platform.runLater(()->{
                         // 2.处理对话框记录
-                        String data = new String(message.getData());
+                        String data = StringEscapeUtils.unescapeJava(new String(message.getData() , StandardCharsets.UTF_8));
                         String subject = message.getSubject();
                         SubscriptionHBox subscriptionHBox = new SubscriptionHBox();
                         subscriptionHBox.setData(new SubscriptionLabel(subject , data));
