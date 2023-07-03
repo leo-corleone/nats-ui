@@ -1,6 +1,7 @@
 package org.suen.controller;
 
 import cn.hutool.core.thread.ThreadUtil;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.application.Platform;
@@ -22,6 +23,7 @@ import org.suen.domain.Login;
 import org.suen.exception.BusinessException;
 import org.suen.nats.NatsClient;
 import org.suen.service.MessageService;
+import org.suen.util.JsonUtil;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -162,9 +164,11 @@ public class MessageController implements Initializable {
             return;
         }
         String payloadData = payloadText.getText();
-        String payload = "";
-        if (payloadData != null && payloadData.trim().length() > 0) {
-            payload = payloadData;
+        Object payload;
+        if (payloadData == null){
+            payload = "";
+        }else {
+            payload = JsonUtil.isJson(payloadData) ? JSON.parseObject(payloadData , Object.class) : StringEscapeUtils.unescapeJava(payloadData);
         }
         messageService.publish(topic, payload, data -> {
             showPublicationData(topic, data);

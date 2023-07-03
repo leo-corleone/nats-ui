@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import org.apache.commons.text.StringEscapeUtils;
+import org.suen.util.JsonUtil;
 
 /**
  * @author: suen
@@ -28,13 +29,13 @@ public class SubscriptionLabel extends Label {
         this.data = data;
         String desc = "Topic:" + topic + "\n\n";
         if (ObjectUtil.isNotEmpty(data)){
-            desc += StringEscapeUtils.unescapeJava(data);
+            desc += JsonUtil.jsonFormat(data);
         }
         setText(desc);
         setTextFill(Color.WHITE);
         setMaxWidth(630);
 
-        tooltip.setText(data);
+        tooltip.setText(desc);
         tooltip.setContentDisplay(ContentDisplay.LEFT);
         setTooltip(tooltip);
     }

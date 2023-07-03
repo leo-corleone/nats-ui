@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import org.springframework.boot.json.GsonJsonParser;
+import org.suen.util.JsonUtil;
 
 /**
  * @author: suen
@@ -25,12 +26,12 @@ public class PublicationLabel extends Label {
         this.topic = topic;
         this.data = data;
         String desc = "Topic:" + topic + "\n\n";
-        desc += data;
+        desc += JsonUtil.jsonFormat(data);
         setText(desc);
         setTextFill(Color.WHITE);
         setMaxWidth(630);
 
-        tooltip.setText(data);
+        tooltip.setText(desc);
         tooltip.setContentDisplay(ContentDisplay.LEFT);
         setTooltip(tooltip);
     }
