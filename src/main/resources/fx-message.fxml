@@ -109,7 +109,7 @@
                         <String fx:value="Publish"/>
                     </value>
                 </ComboBox>
-                <TextArea fx:id="payloadText" promptText="please input payload..." maxHeight="110" minWidth="700"
+                <TextArea fx:id="payloadText" onMouseClicked="#onTextFormat" promptText="please input payload..." maxHeight="110" minWidth="700"
                           translateX="5" translateY="400"></TextArea>
             </children>
         </AnchorPane>

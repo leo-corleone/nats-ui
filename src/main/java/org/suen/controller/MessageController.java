@@ -30,6 +30,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -321,6 +322,17 @@ public class MessageController implements Initializable {
         connectBtn.setGraphic(imageView);
         connectBtn.setTooltip(tooltip);
         descLbl.setText(userDesc);
+    }
+
+    public void onTextFormat(){
+        int position = payloadText.getCaretPosition();
+        String payloadTextText = payloadText.getText();
+        boolean isJson = JsonUtil.isJson(payloadTextText);
+        if (isJson && !Objects.equals(payloadTextText, "")){
+            String content = JsonUtil.jsonFormat(payloadTextText);
+            payloadText.setText(content);
+            payloadText.positionCaret(position);
+        }
     }
 
     private void addImageListener() {
