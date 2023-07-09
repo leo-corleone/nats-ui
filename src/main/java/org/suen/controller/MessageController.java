@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -74,6 +76,13 @@ public class MessageController implements Initializable {
 
     @FXML
     Label publishLbl;
+
+    @FXML
+    Label requestLbl;
+
+
+    @FXML
+    ComboBox<String> comboBox;
 
     @FXML
     TextField topicTxt;
@@ -158,6 +167,7 @@ public class MessageController implements Initializable {
 
 
     public void onPublish() {
+
         String topic = topicTxt.getText();
         if (topic == null || topic.trim().length() == 0) {
             // TODO 提示信息
@@ -174,6 +184,29 @@ public class MessageController implements Initializable {
             showPublicationData(topic, data);
         });
     }
+
+
+
+    public void onRequest() {
+        String topic = topicTxt.getText();
+        if (topic == null || topic.trim().length() == 0) {
+            // TODO 提示信息
+            return;
+        }
+        String payloadData = payloadText.getText();
+        Object payload;
+        if (payloadData == null){
+            payload = "";
+        }else {
+            payload = JsonUtil.isJson(payloadData) ? JSON.parseObject(payloadData , Object.class) : StringEscapeUtils.unescapeJava(payloadData);
+        }
+        messageService.publish(topic, payload, data -> {
+            showPublicationData(topic, data);
+        });
+    }
+
+
+
 
     private void showPublicationData(String subject, String payload) {
         PublicationHBox publicationHBox = new PublicationHBox();
@@ -262,6 +295,15 @@ public class MessageController implements Initializable {
         initComponentStyle();
         addImageListener();
         addScrollPaneListener();
+        addModeListener();
+    }
+
+    private void addModeListener() {
+        comboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            boolean isPublish = newValue.equalsIgnoreCase("Publish");
+            publishLbl.setVisible(isPublish);
+            requestLbl.setVisible(!isPublish);
+        });
     }
 
     private void addScrollPaneListener() {
