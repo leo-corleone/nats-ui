@@ -1,8 +1,12 @@
 package org.suen.nats.listener;
 
+import cn.hutool.core.date.DateUtil;
 import io.nats.client.*;
 import io.nats.client.support.Status;
+import javafx.scene.control.TextArea;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.suen.util.NatsServerUtil;
 
 /**
@@ -10,9 +14,14 @@ import org.suen.util.NatsServerUtil;
  * @author: .sun
  */
 
+
+@Data
 @Slf4j
+@Component
 public class NatsErrorListener implements ErrorListener {
 
+
+    private TextArea textArea;
 
     public NatsErrorListener() {
 
@@ -30,8 +39,9 @@ public class NatsErrorListener implements ErrorListener {
      */
     @Override
     public void errorOccurred(Connection conn, String error) {
-
-        log.error("service: [{}] , server : [{}]  ,  NATS connection error occurred :[{}]", conn.getOptions().getConnectionName(), NatsServerUtil.getServer(conn), error);
+        String format = String.format("server : [%s]  ,  NATS connection error occurred :[%s]", NatsServerUtil.getServer(conn), error);
+        log.error(format);
+        textArea.setText(textArea.getText() +  DateUtil.now() +  " " +  format + "\n");
     }
 
     /**
@@ -46,7 +56,9 @@ public class NatsErrorListener implements ErrorListener {
      */
     @Override
     public void exceptionOccurred(Connection conn, Exception exp) {
-        log.error("service: [{}] , server : [{}]  ,  NATS connection exception occurred :[{}]", conn.getOptions().getConnectionName(), NatsServerUtil.getServer(conn), exp.getMessage());
+        String format = String.format("server : [%s]  ,  NATS connection exception occurred :[%s]", NatsServerUtil.getServer(conn), exp);
+        log.error(format);
+        textArea.setText(textArea.getText() +  DateUtil.now() +  " " +  format + "\n");
     }
 
     /**
@@ -65,7 +77,9 @@ public class NatsErrorListener implements ErrorListener {
      */
     @Override
     public void slowConsumerDetected(Connection conn, Consumer consumer) {
-        log.error("service: [{}] , server : [{}]  ,  NATS connection slow consumer detected", conn.getOptions().getConnectionName(), NatsServerUtil.getServer(conn));
+        String format = String.format("server : [%s]  ,  NATS connection slow consumer detected", NatsServerUtil.getServer(conn));
+        log.error(format);
+        textArea.setText(textArea.getText() +  DateUtil.now() +  " " +  format + "\n");
     }
 
     /**
@@ -76,7 +90,9 @@ public class NatsErrorListener implements ErrorListener {
      */
     @Override
     public void messageDiscarded(Connection conn, Message msg) {
-        log.error("service: [{}] , server : [{}]  ,  NATS connection message discard :[{}]", conn.getOptions().getConnectionName(), NatsServerUtil.getServer(conn), msg.getSubject());
+        String format = String.format("server : [{}]  ,  NATS connection message discard :[{}]",NatsServerUtil.getServer(conn), msg.getSubject());
+        log.error(format);
+        textArea.setText(textArea.getText() +  DateUtil.now() +  " " +  format + "\n");
     }
 
     /**
@@ -90,7 +106,9 @@ public class NatsErrorListener implements ErrorListener {
      */
     @Override
     public void heartbeatAlarm(Connection conn, JetStreamSubscription sub, long lastStreamSequence, long lastConsumerSequence) {
-        log.error("service: [{}] , server : [{}]  ,  NATS connection heartbeat alarm :[{}]", conn.getOptions().getConnectionName(), NatsServerUtil.getServer(conn), sub);
+        String format = String.format("server : [{}]  ,  NATS connection heartbeat alarm :[{}]",NatsServerUtil.getServer(conn), sub);
+        log.error(format);
+        textArea.setText(textArea.getText() +  DateUtil.now() +  " " +  format + "\n");
     }
 
     /**
@@ -102,7 +120,9 @@ public class NatsErrorListener implements ErrorListener {
      */
     @Override
     public void unhandledStatus(Connection conn, JetStreamSubscription sub, Status status) {
-        log.error("service: [{}] , server : [{}]  ,  NATS connection unhandled status :[{}]", conn.getOptions().getConnectionName(), NatsServerUtil.getServer(conn), status);
+        String format = String.format("server : [{}]  ,  NATS connection unhandled status :[{}]", NatsServerUtil.getServer(conn), status);
+        log.error(format);
+        textArea.setText(textArea.getText() +  DateUtil.now() +  " " +  format + "\n");
     }
 
     /**
@@ -115,7 +135,9 @@ public class NatsErrorListener implements ErrorListener {
      */
     @Override
     public void flowControlProcessed(Connection conn, JetStreamSubscription sub, String subject, FlowControlSource source) {
-        log.error("service: [{}] , server : [{}]  ,  NATS connection flow control processed :[{}]", conn.getOptions().getConnectionName(), NatsServerUtil.getServer(conn), sub);
+        String format = String.format("server : [{}]  ,  NATS connection flow control processed :[{}]",NatsServerUtil.getServer(conn), sub);
+        log.error(format);
+        textArea.setText(textArea.getText() +  DateUtil.now() +  " " +  format + "\n");
     }
 
 }

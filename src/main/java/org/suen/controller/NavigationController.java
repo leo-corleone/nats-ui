@@ -1,5 +1,6 @@
 package org.suen.controller;
 
+import de.felixroske.jfxsupport.FXMLController;
 import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -12,6 +13,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.suen.util.FXMLLoaderUtil;
 
+import javax.annotation.PostConstruct;
+
 /**
  * @author: suen
  * @time: 2023/6/11
@@ -19,7 +22,7 @@ import org.suen.util.FXMLLoaderUtil;
  **/
 @Data
 @Slf4j
-@Component
+@FXMLController
 public class NavigationController {
 
     @FXML
@@ -27,11 +30,19 @@ public class NavigationController {
 
     Pane loginPane;
 
+    Pane logPane;
+
     Pane orginalLoginPane;
 
 
-    public void initialize(){
 
+    public void initialize(){
+        if (loginPane == null) {
+            loginPane = (Pane) FXMLLoaderUtil.getParent("fx-login.fxml");
+        }
+        if (logPane == null) {
+            logPane = (Pane) FXMLLoaderUtil.getParent("fx-nats-log.fxml");
+        }
     }
 
     public void onLogin(){
@@ -39,6 +50,13 @@ public class NavigationController {
             loginPane = (Pane) FXMLLoaderUtil.getParent("fx-login.fxml");
         }
         mainPane.setCenter(loginPane);
+    }
+
+    public void onLog(){
+        if (logPane == null) {
+            logPane = (Pane) FXMLLoaderUtil.getParent("fx-nats-log.fxml");
+        }
+        mainPane.setCenter(logPane);
     }
 
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.paint.Color?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.suen.controller.NatsLogController"
+            fx:id="natsLogPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFF">
+    <center>
+       <TextArea fx:id="natsLogArea" editable="false" translateX="5" translateY="2" maxWidth="900" maxHeight="550">
+       </TextArea>
+    </center>
+</BorderPane>

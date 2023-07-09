@@ -1,9 +1,16 @@
 package org.suen.nats.listener;
 
+import cn.hutool.core.date.DateUtil;
 import io.nats.client.Connection;
 import io.nats.client.ConnectionListener;
+import javafx.scene.control.TextArea;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.stereotype.Component;
 import org.suen.util.NatsServerUtil;
+
+import javax.annotation.Resource;
 
 /**
  * @author: suen
@@ -11,8 +18,13 @@ import org.suen.util.NatsServerUtil;
  * @description:
  **/
 
+@Data
 @Slf4j
+@Component
 public class NatsConnectionListener implements ConnectionListener {
+
+
+    private TextArea textArea;
 
     /**
      * Connection related events that occur asynchronously in the client code are
@@ -24,6 +36,8 @@ public class NatsConnectionListener implements ConnectionListener {
      */
     @Override
     public void connectionEvent(Connection conn, Events type) {
-        log.info("service: [{}] server: [{}]  NATS connection status changed {}" ,conn.getOptions().getConnectionName() , NatsServerUtil.getServer(conn), type);
+        String format = String.format("server: [%s]  NATS connection status changed %s",  NatsServerUtil.getServer(conn), type);
+        log.info(format);
+        textArea.setText(textArea.getText() +  DateUtil.now() +  " " +  format + "\n");
     }
 }

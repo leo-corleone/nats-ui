@@ -11,6 +11,7 @@ import org.suen.exception.Error;
 import org.suen.nats.listener.NatsConnectionListener;
 import org.suen.nats.listener.NatsErrorListener;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
@@ -35,13 +36,19 @@ public class NatsClient implements DisposableBean {
 
     private Dispatcher dispatcher;
 
+    @Resource
+    private ConnectionListener connectionListener;
+
+    @Resource
+    private NatsErrorListener natsErrorListener;
+
 
     private final HashMap<String , Subscription> subscriptionMap = new HashMap<>();
 
 
     public boolean init(String host , Integer port , String username , String password) throws BusinessException {
-        Options.Builder server = new Options.Builder().maxReconnects(-1).connectionListener(new NatsConnectionListener())
-                .errorListener(new NatsErrorListener())
+        Options.Builder server = new Options.Builder().maxReconnects(-1).connectionListener(connectionListener)
+                .errorListener(natsErrorListener)
                 .maxPingsOut(-1).server(host + ":" + port);
         if (username != null && username.trim().length() > 0 && password != null && password.trim().length() > 0){
             server.userInfo(username , password);
