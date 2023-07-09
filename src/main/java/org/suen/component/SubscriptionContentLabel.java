@@ -1,18 +1,18 @@
 package org.suen.component;
 
+import cn.hutool.core.util.ObjectUtil;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
-import org.springframework.boot.json.GsonJsonParser;
 import org.suen.util.JsonUtil;
 
 /**
  * @author: suen
- * @time: 2023/6/23
+ * @time: 2023/6/24
  * @description:
  **/
-public class PublicationLabel extends Label {
+public class SubscriptionContentLabel extends Label {
 
     private String topic;
 
@@ -22,11 +22,13 @@ public class PublicationLabel extends Label {
     private Tooltip tooltip = new Tooltip();
 
 
-    public PublicationLabel(String topic, String data) {
+    public SubscriptionContentLabel(String topic, String data) {
         this.topic = topic;
         this.data = data;
         String desc = "Topic:" + topic + "\n\n";
-        desc += JsonUtil.jsonFormat(data);
+        if (ObjectUtil.isNotEmpty(data)){
+            desc += JsonUtil.jsonFormat(data);
+        }
         setText(desc);
         setTextFill(Color.WHITE);
         setMaxWidth(630);
@@ -35,4 +37,5 @@ public class PublicationLabel extends Label {
         tooltip.setContentDisplay(ContentDisplay.LEFT);
         setTooltip(tooltip);
     }
+
 }

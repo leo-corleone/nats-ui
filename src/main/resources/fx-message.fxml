@@ -91,7 +91,7 @@
                         </ImageView>
                     </graphic>
                 </Label>
-                <Label fx:id="requestLbl" visible="false" onMouseClicked="#onRequest" translateY="370" translateX="583">
+                <Label fx:id="requestLbl" visible="false" onMouseClicked="#onReply" translateY="370" translateX="583">
                     <graphic>
                         <ImageView fitHeight="25" fitWidth="25">
                             <Image url="image/request.png"></Image>

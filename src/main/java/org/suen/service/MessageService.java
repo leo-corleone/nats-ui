@@ -9,6 +9,8 @@ import org.suen.nats.NatsClient;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
 
 /**
@@ -27,6 +29,17 @@ public class MessageService {
     public void publish(String subject , Object payload , Consumer<String> consumer){
         natsClient.publish(subject , payload);
         consumer.accept(payload.toString());
+    }
+
+
+    public void request(String subject , Object payload , Consumer<String> consumer){
+        Object request = null;
+        try {
+            request = natsClient.request(subject, payload);
+        } catch (ExecutionException | TimeoutException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        consumer.accept(request.toString());
     }
 
     public void subscribe(String subject , MessageHandler messageHandler){

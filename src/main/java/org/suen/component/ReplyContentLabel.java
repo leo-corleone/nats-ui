@@ -1,20 +1,17 @@
 package org.suen.component;
 
-import cn.hutool.core.util.ObjectUtil;
-import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
-import org.apache.commons.text.StringEscapeUtils;
 import org.suen.util.JsonUtil;
 
 /**
  * @author: suen
- * @time: 2023/6/24
+ * @time: 2023/6/23
  * @description:
  **/
-public class SubscriptionLabel extends Label {
+public class ReplyContentLabel extends Label {
 
     private String topic;
 
@@ -24,13 +21,11 @@ public class SubscriptionLabel extends Label {
     private Tooltip tooltip = new Tooltip();
 
 
-    public SubscriptionLabel(String topic, String data) {
+    public ReplyContentLabel(String topic, String data) {
         this.topic = topic;
         this.data = data;
         String desc = "Topic:" + topic + "\n\n";
-        if (ObjectUtil.isNotEmpty(data)){
-            desc += JsonUtil.jsonFormat(data);
-        }
+        desc += JsonUtil.jsonFormat(data);
         setText(desc);
         setTextFill(Color.WHITE);
         setMaxWidth(630);
@@ -39,5 +34,4 @@ public class SubscriptionLabel extends Label {
         tooltip.setContentDisplay(ContentDisplay.LEFT);
         setTooltip(tooltip);
     }
-
 }

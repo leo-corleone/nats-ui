@@ -73,7 +73,6 @@ public class LoginController {
         login.setPort(portField.getText());
         login.setUsername(nameField.getText());
         login.setPassword(pwdField.getText());
-
         try {
             if (loginService.loginNats(login)) {
                 if (messagePane == null) {

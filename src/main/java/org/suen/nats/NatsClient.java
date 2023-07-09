@@ -12,10 +12,12 @@ import org.suen.nats.listener.NatsConnectionListener;
 import org.suen.nats.listener.NatsErrorListener;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -57,6 +59,14 @@ public class NatsClient implements DisposableBean {
     public void subscribe(String subject , MessageHandler handler){
         Subscription subscription = dispatcher.subscribe(subject, handler);
         subscriptionMap.put(subject , subscription);
+    }
+
+
+    public Object request(String subject , Object replyPayload) throws ExecutionException, InterruptedException, TimeoutException {
+        NatsMessage message = new NatsMessage.Builder().data(JSONObject.toJSONBytes(replyPayload)).subject(subject).build();
+        CompletableFuture<Message> request = nc.request(message);
+        Message msg = request.get(10, TimeUnit.SECONDS);
+        return new String(msg.getData() , StandardCharsets.UTF_8);
     }
 
 

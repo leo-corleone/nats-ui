@@ -2,11 +2,8 @@ package org.suen.controller;
 
 import cn.hutool.core.thread.ThreadUtil;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -156,7 +153,7 @@ public class MessageController implements Initializable {
                         String data = StringEscapeUtils.unescapeJava(new String(message.getData() , StandardCharsets.UTF_8));
                         String subject = message.getSubject();
                         SubscriptionHBox subscriptionHBox = new SubscriptionHBox();
-                        subscriptionHBox.setData(new SubscriptionLabel(subject , data));
+                        subscriptionHBox.setData(new SubscriptionContentLabel(subject , data));
                         subscriptionHBox.setBackgroundColor(color);
                         msgPane.getChildren().add(subscriptionHBox.getComponent());
                     }));
@@ -186,8 +183,7 @@ public class MessageController implements Initializable {
     }
 
 
-
-    public void onRequest() {
+    public void onReply() {
         String topic = topicTxt.getText();
         if (topic == null || topic.trim().length() == 0) {
             // TODO 提示信息
@@ -200,17 +196,22 @@ public class MessageController implements Initializable {
         }else {
             payload = JsonUtil.isJson(payloadData) ? JSON.parseObject(payloadData , Object.class) : StringEscapeUtils.unescapeJava(payloadData);
         }
-        messageService.publish(topic, payload, data -> {
-            showPublicationData(topic, data);
+        messageService.request(topic, payload, data -> {
+            showReplyData(topic, data);
         });
     }
 
 
+    private void showReplyData(String subject, String payload) {
+        ReplyHBox replyHBox = new ReplyHBox();
+        replyHBox.setData(new ReplyContentLabel(subject, payload));
+        msgPane.getChildren().add(replyHBox.getComponent());
+    }
 
 
     private void showPublicationData(String subject, String payload) {
         PublicationHBox publicationHBox = new PublicationHBox();
-        publicationHBox.setData(new PublicationLabel(subject, payload));
+        publicationHBox.setData(new PublicationContentLabel(subject, payload));
         msgPane.getChildren().add(publicationHBox.getComponent());
     }
 
@@ -238,7 +239,6 @@ public class MessageController implements Initializable {
             connectTipLbl.setTextFill(Color.RED);
             connectTipLbl.setText(e.getMsg());
         }
-
     }
 
 
